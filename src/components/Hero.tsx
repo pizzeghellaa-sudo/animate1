@@ -1,5 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { motion } from "motion/react";
+import heroVideo from "../assets/video1.webm";
+import heroVideoMp4 from "../assets/video1.mp4";
 
 interface HeroProps {
   onOpenBooking: () => void;
@@ -44,7 +46,7 @@ export default function Hero({ onOpenBooking, onExploreSuites }: HeroProps) {
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-primary">
       {/* Soft overlay for typography protection */}
-      <div className="absolute inset-0 bg-black/45 z-10" />
+      <div className="absolute inset-0 bg-black/5 z-10" />
 
       {/* Atmospheric Spa Steam Video */}
       <video
@@ -53,12 +55,10 @@ export default function Hero({ onOpenBooking, onExploreSuites }: HeroProps) {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover scale-105 hero-video-mask select-none pointer-events-none opacity-80 z-0"
+        className="absolute inset-0 w-full h-full object-cover scale-105 hero-video-mask select-none pointer-events-none z-0"
       >
-        <source
-          src="https://assets.mixkit.co/videos/preview/mixkit-steam-rising-from-a-hot-pool-at-night-42845-large.mp4"
-          type="video/mp4"
-        />
+        <source src={heroVideo} type="video/webm" />
+        <source src={heroVideoMp4} type="video/mp4" />
       </video>
 
       {/* Elegant Ken Burns Ambient Poster Fallback */}

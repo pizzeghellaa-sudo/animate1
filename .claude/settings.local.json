@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Data\\\\Developers\\\\bru_sites\\\\animate1\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(npm run *)"
+    ]
+  }
+}
