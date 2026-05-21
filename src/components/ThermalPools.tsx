@@ -1,7 +1,32 @@
 import { motion } from "motion/react";
+import { useRef, useState, useEffect } from "react";
 import { Droplets, Waves, Thermometer } from "lucide-react";
+import thermeVideo from "../assets/video2.webm";
+import thermeVideoMp4 from "../assets/video2.mp4";
 
 export default function ThermalPools() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.play().then(() => {
+      setIsVideoPlaying(true);
+    }).catch(() => {
+      setIsVideoPlaying(true);
+    });
+    const onPlaying = () => setIsVideoPlaying(true);
+    const onPause = () => setIsVideoPlaying(false);
+    video.addEventListener("playing", onPlaying);
+    video.addEventListener("pause", onPause);
+    return () => {
+      video.removeEventListener("playing", onPlaying);
+      video.removeEventListener("pause", onPause);
+    };
+  }, []);
+
   const poolStats = [
     {
       icon: <Droplets className="w-5 h-5 text-tertiary" />,
@@ -18,7 +43,25 @@ export default function ThermalPools() {
   ];
 
   return (
-    <section id="pools" className="pb-24 md:pb-40 px-6 md:px-20 max-w-[1440px] mx-auto overflow-hidden bg-surface-bright">
+    <>
+      <section className="relative h-screen w-full overflow-hidden bg-primary">
+        <motion.video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isVideoPlaying ? 1 : 0 }}
+          transition={{ duration: 0.8, ease: "easeIn" }}
+          className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none z-0"
+        >
+          <source src={thermeVideo} type="video/webm" />
+          <source src={thermeVideoMp4} type="video/mp4" />
+        </motion.video>
+      </section>
+      <section id="pools" className="pb-24 md:pb-40 px-6 md:px-20 max-w-[1440px] mx-auto overflow-hidden bg-surface-bright">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
         {/* Asymmetric Wide Image Container */}
         <motion.div
@@ -82,5 +125,6 @@ export default function ThermalPools() {
         </motion.div>
       </div>
     </section>
+    </>
   );
 }
