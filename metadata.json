@@ -1,0 +1,6 @@
+{
+  "name": "Mioni Royal San",
+  "description": "Hotel Termale & Luxury SPA landing page and booking application",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
