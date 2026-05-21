@@ -49,35 +49,21 @@ export default function Hero({ onOpenBooking, onExploreSuites }: HeroProps) {
       <div className="absolute inset-0 bg-black/5 z-10" />
 
       {/* Atmospheric Spa Steam Video */}
-      <video
+      <motion.video
         ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
+        preload="auto"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isVideoPlaying ? 1 : 0 }}
+        transition={{ duration: 0.8, ease: "easeIn" }}
         className="absolute inset-0 w-full h-full object-cover scale-105 hero-video-mask select-none pointer-events-none z-0"
       >
         <source src={heroVideo} type="video/webm" />
         <source src={heroVideoMp4} type="video/mp4" />
-      </video>
-
-      {/* Elegant Ken Burns Ambient Poster Fallback */}
-      <motion.div
-        initial={{ opacity: 1 }}
-        animate={{ opacity: isVideoPlaying ? 0 : 1 }}
-        transition={{ duration: 1.2, ease: "easeInOut" }}
-        className="absolute inset-0 select-none pointer-events-none z-5 bg-primary"
-      >
-        <motion.img
-          initial={{ scale: 1 }}
-          animate={{ scale: isVideoPlaying ? 1 : 1.05 }}
-          transition={{ duration: 20, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKZTF5nbCq3e2P0z_4DaIPi_E39FemwJNy_oe-P4-xERZS1Pzz2uMKxsUF26zfXOCgq_H4ZI4N8FJv__YoxmbyWpksX8XmYldo_zekWQS4AOBI5WGF5_I_YyzQSbksFpVI1zOb0m_dSZpvJf1pn6b4JD-i0VfKZ4oMjMBHKCXplP8Yr9bmDw4yDQ_BwhV-oTq0erE9Ou2otqjtM9LdITQKaI3G1zm-sr7oYbloxXNkcsPEtvpvOuqJ4ulKjhvwfnA0zL5DSVfq0fw"
-          alt="Thermal Pool Ambient Backdrop"
-          className="w-full h-full object-cover opacity-75"
-          referrerPolicy="no-referrer"
-        />
-      </motion.div>
+      </motion.video>
 
       {/* Hero content */}
       <div className="relative z-25 text-center px-6 max-w-4xl mx-auto space-y-6">
